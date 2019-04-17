@@ -84,6 +84,21 @@ $show_complete_tasks = rand(0, 1);
                 	];
                 ?>
 
+                <?php function get_task_number ( $a, $b ){                		      
+                    
+                    	$item_count = 0;
+
+                    	foreach ($b as $key => $val) {               	
+
+                    	if( $val['task_category'] == $a ){
+                    		$item_count = $item_count + 1;
+                    	}
+                    	}        	
+
+                       	return $item_count;
+
+                }; ?>
+
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
 					
@@ -93,7 +108,9 @@ $show_complete_tasks = rand(0, 1);
 					while ($index < $num): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?=$projects_list[$index];?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                         
+						<span class="main-navigation__list-item-count"><?=get_task_number( $projects_list[$index], $tasks_list ); ?></span>
+
                         </li>
 					<?php $index++; ?>
 					<?php endwhile; ?>
