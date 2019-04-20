@@ -1,6 +1,7 @@
 <?php 
 
 require_once('helpers.php');
+require_once('functions.php');
 require_once('data.php');
 
 $num = count($projects_list);
