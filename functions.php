@@ -1,6 +1,4 @@
 <?php
-// показывать или нет выполненные задачи
-$show_complete_tasks = rand(0, 1);
 
 function get_task_number ( $project_name, $task_data ){ 
                     

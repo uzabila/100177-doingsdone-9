@@ -1,5 +1,8 @@
  <?php 
 
+ // показывать или нет выполненные задачи
+$show_complete_tasks = rand(0, 1);
+
                     $tasks_list = [
                     [
                         'task_name' => 'Собеседование в IT компании',
