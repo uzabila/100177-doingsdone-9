@@ -54,7 +54,10 @@
 
                 <?php foreach ($tasks_list as $key => $val): ?>
 
-                    <tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?>">
+
+                	<?php if( $val['task_status'] == false ): ?>
+
+                    <tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?>" >
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
@@ -66,7 +69,28 @@
                         <td class="task__controls"></td>
                     </tr>
 
-                <?php endforeach; ?>
+                    <?php elseif( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>
+
+					<tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?>" >
+                        <td class="task__select">
+                            <label class="checkbox task__checkbox">
+                                <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
+                                <span class="checkbox__text"><?=$val['task_name'];?></span>
+                            </label>
+                        </td>
+
+                        <td class="task__date"><?=$val['task_date_done'];?></td>
+                        <td class="task__controls"></td>
+                    </tr>
+
+                   	<?php else: ?>
+
+
+
+                <?php endif; ?>
+                
+
+                 <?php endforeach; ?>
 
                 </table>
             </main>
