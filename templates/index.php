@@ -54,10 +54,19 @@
 
                 <?php foreach ($tasks_list as $key => $val): ?>
 
+                    <?php 
+
+                    $dt_end = strtotime($val['task_date_done']);
+                    $ts_now = time();
+                    $secs_in_hour = 3600;
+                    $ts_diff = $dt_end - $ts_now;
+                    $hours_until_end = floor($ts_diff / $secs_in_hour);                  
+
+                    ?>
 
                 	<?php if( $val['task_status'] == false ): ?>
 
-                    <tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?>" >
+                    <tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?> <?php if( $hours_until_end <= 24 && is_int($dt_end) ) :?>task--important<?php endif; ?>" >
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
@@ -65,13 +74,13 @@
                             </label>
                         </td>
 
-                        <td class="task__date"><?=$val['task_date_done'];?></td>
+                        <td class="task__date"><?=$val['task_date_done']; ?></td>
                         <td class="task__controls"></td>
                     </tr>
 
                     <?php elseif( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>
 
-					<tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?>" >
+					<tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?> <?php if( $hours_until_end <= 24 && is_int($dt_end) ) :?>task--important<?php endif; ?>" >
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
