@@ -2,9 +2,11 @@ CREATE DATABASE ermilov_doingsdone
 DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 
+USE ermilov_doingsdone;
+
 CREATE TABLE users (
 id INT AUTO_INCREMENT PRIMARY KEY,
-reg_date DATE,
+reg_date DATETIME,
 name CHAR(255) NOT NULL,
 email CHAR(128) NOT NULL UNIQUE,
 password CHAR(64) NOT NULL
@@ -23,5 +25,6 @@ user_id INT
 
 CREATE TABLE projects_cat (
 id INT AUTO_INCREMENT PRIMARY KEY,
-name CHAR(255) NOT NULL UNIQUE
+name CHAR(255) NOT NULL UNIQUE,
+user_id INT UNIQUE
 ); 
