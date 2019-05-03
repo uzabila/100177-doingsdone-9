@@ -16,8 +16,8 @@ CREATE TABLE tasks (
 id INT AUTO_INCREMENT PRIMARY KEY,
 date_create DATETIME,
 date_exp DATE,
-name CHAR(255),
-status INT,
+name CHAR(255) NOT NULL,
+status INT DEFAULT 0,
 task_url CHAR(255) NOT NULL UNIQUE,
 cat_id INT,
 user_id INT
@@ -25,9 +25,11 @@ user_id INT
 
 CREATE TABLE projects_cat (
 id INT AUTO_INCREMENT PRIMARY KEY,
-name CHAR(255) NOT NULL,
 user_id INT NOT NULL,
-UNIQUE KEY 'category_and_user' ('name','user_id')
+name CHAR(255) NOT NULL,
+UNIQUE KEY `category_and_user` (`name`,`user_id`)
 ); 
 
 CREATE INDEX tasks_search_index ON tasks(name);
+CREATE INDEX tasks_category_index ON tasks(cat_id);
+CREATE INDEX tasks_user_index ON tasks(user_id);
