@@ -25,6 +25,9 @@ user_id INT
 
 CREATE TABLE projects_cat (
 id INT AUTO_INCREMENT PRIMARY KEY,
-name CHAR(255) NOT NULL UNIQUE,
-user_id INT UNIQUE
+name CHAR(255) NOT NULL,
+user_id INT NOT NULL,
+UNIQUE KEY 'category_and_user' ('name','user_id')
 ); 
+
+CREATE INDEX tasks_search_index ON tasks(name);
