@@ -75,6 +75,7 @@
                         </td>
 
                         <td class="task__date"><?=$val['task_date_done']; ?></td>
+                        <td class="task__file"></td>
                         <td class="task__controls"></td>
                     </tr>
 
@@ -89,6 +90,7 @@
                         </td>
 
                         <td class="task__date"><?=$val['task_date_done'];?></td>
+                        <td class="task__file"></td>
                         <td class="task__controls"></td>
                     </tr>
 

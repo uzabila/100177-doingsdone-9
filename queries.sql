@@ -28,9 +28,9 @@ VALUES
 /* Получение данных из БД */
 
 /* Получить список из всех проектов для одного пользователя. Объедините проекты с задачами, чтобы посчитать количество задач в каждом проекте и в дальнейшем выводить эту цифру рядом с именем проекта*/
-SELECT pc.id, pc.name, COUNT(t.id)
+SELECT pc.id, t.user_id, pc.name, COUNT(t.id)
 FROM projects_cat pc
-LEFT JOIN tasks t ON t.cat_id = pc.id AND t.user_id = 1
+LEFT JOIN tasks t ON t.cat_id = pc.id WHERE t.user_id = 1
 GROUP BY pc.id;
 
 /* Получить список из всех задач для одного проекта */
