@@ -74,7 +74,15 @@
                         </td>
 
                         <td class="task__date"><?=$val['date_exp']; ?></td>
-                        <td class="task__controls"><a class="download-link" href="#">Home.psd</a> </td>
+                        <td class="task__controls">
+
+                            <?php if( $val['task_url'] == true ): ?>
+
+                            <a class="download-link" href="#">Home.psd</a> 
+
+                            <?php endif; ?>
+
+                        </td>
                         
                     </tr>
 
@@ -89,7 +97,15 @@
                         </td>
 
                         <td class="task__date"><?=$val['date_exp'];?></td>
-                        <td class="task__controls"><a class="download-link" href="#">Home.psd</a> </td>
+                        <td class="task__controls">
+
+                        <?php if( $val['task_url'] == true ): ?>
+
+                            <a class="download-link" href="#">Home.psd</a> 
+
+                        <?php endif; ?>
+
+                        </td>
                         
                     </tr>
 

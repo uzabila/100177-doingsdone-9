@@ -6,6 +6,7 @@ if (!$link) {
     $error = mysqli_connect_error();
     $main_content = include_template('error.php', ['error' => $error]);
     print($main_content);
+    die;
 
 } else {
     
@@ -21,7 +22,8 @@ if (!$link) {
     else {
         $error = mysqli_error($link);
         $main_content = include_template('error.php', ['error' => $error]); 
-        print($main_content);       
+        print($main_content);
+        die;
     }
 
     // получение из БД списка задач
@@ -34,8 +36,10 @@ if (!$link) {
     }
     else {
         $main_content = include_template('error.php', ['error' => mysqli_error($link)]);
-        print($main_content);        
+        print($main_content);
+        die;    
     }
+
 
     $main_content = include_template('index.php', [ 
     'tasks_list' => $tasks_list,
