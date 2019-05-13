@@ -1,15 +1,13 @@
 <?php 
-// require_once('data.php');
 require_once('init.php');
-require_once('helpers.php');
-// require_once('functions.php');
 
 if (!$link) {
 
     $error = mysqli_connect_error();
-    $content = include_template('error.php', ['error' => $error]);
-}
-else {
+    $main_content = include_template('error.php', ['error' => $error]);
+    print($main_content);
+
+} else {
     
 	// получаем из БД проекты
 
@@ -22,33 +20,35 @@ else {
     }
     else {
         $error = mysqli_error($link);
-        $content = include_template('error.php', ['error' => $error]);
+        $main_content = include_template('error.php', ['error' => $error]); 
+        print($main_content);       
     }
 
     // получение из БД списка задач
 
-    $sql = 'SELECT `status`, `name`, `date_exp`, `task_url` FROM tasks WHERE user_id=1 ';
+    $sql = 'SELECT `status`, `name`, `date_exp`, `task_url`, `cat_id` FROM tasks WHERE user_id=1 ';
          
     if ($res = mysqli_query($link, $sql)) {
         $tasks_list = mysqli_fetch_all($res, MYSQLI_ASSOC);
         
     }
     else {
-        $content = include_template('error.php', ['error' => mysqli_error($link)]);
+        $main_content = include_template('error.php', ['error' => mysqli_error($link)]);
+        print($main_content);        
     }
 
+    $main_content = include_template('index.php', [ 
+    'tasks_list' => $tasks_list,
+    'projects_list' => $projects_list,
+    'show_complete_tasks' => $show_complete_tasks
+    ]);
+
+    $layout_content = include_template('layout.php',[
+        'content' => $main_content,    
+        'title' => 'DoingsDone - главная страница',
+        'user_name' => 'Василий'
+    ]);
+
+    print($layout_content);
+
 }
-
-$main_content = include_template('index.php', [ 
-	'tasks_list' => $tasks_list,
-	'projects_list' => $projects_list,
-	'show_complete_tasks' => $show_complete_tasks
-]);
-
-$layout_content = include_template('layout.php',[
-    'content' => $main_content,    
-    'title' => 'DoingsDone - главная страница',
-    'user_name' => 'Василий'
-]);
-
-print($layout_content);

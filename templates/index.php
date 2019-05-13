@@ -10,7 +10,8 @@
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?=$val['name'];?></a>
                          
-                        <span class="main-navigation__list-item-count"><?=get_task_number( $val['name'], $tasks_list ); ?></span>
+                        <span class="main-navigation__list-item-count"><?=get_task_number( $val['id'], $tasks_list ); ?></span>
+                        
 
                         </li>
                     
