@@ -3,20 +3,19 @@
 
                   <nav class="main-navigation">
                     <ul class="main-navigation__list">
-
-                    <?php
-                    $index = 0;
-                    $num = count($projects_list);
+                  
+                    <?php foreach ($projects_list as $key => $val): ?>
                     
-                    while ($index < $num): ?>
+
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?=$projects_list[$index];?></a>
+                            <a class="main-navigation__list-item-link" href="#"><?=$val['name'];?></a>
                          
-                        <span class="main-navigation__list-item-count"><?=get_task_number( $projects_list[$index], $tasks_list ); ?></span>
+                        <span class="main-navigation__list-item-count"><?=get_task_number( $val['id'], $tasks_list ); ?></span>
+                        
 
                         </li>
-                    <?php $index++; ?>
-                    <?php endwhile; ?>
+                    
+                    <?php endforeach; ?>
 
                     </ul>
                 </nav>
@@ -56,7 +55,7 @@
 
                     <?php 
 
-                    $dt_end = strtotime($val['task_date_done']);
+                    $dt_end = strtotime($val['date_epx']);
                     $ts_now = time();
                     $secs_in_hour = 3600;
                     $ts_diff = $dt_end - $ts_now;
@@ -64,34 +63,50 @@
 
                     ?>
 
-                	<?php if( $val['task_status'] == false ): ?>
+                	<?php if( $val['status'] == false ): ?>
 
-                    <tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?> <?php if( $hours_until_end <= 24 && is_int($dt_end) ) :?>task--important<?php endif; ?>" >
+                    <tr class="tasks__item task <?php if( $val['status'] == true ): ?>task--completed<?php endif; ?> <?php if( $hours_until_end <= 24 && is_int($dt_end) ) :?>task--important<?php endif; ?>" >
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
-                                <span class="checkbox__text"><?=$val['task_name'];?></span>
+                                <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
+                                <span class="checkbox__text"><?=$val['name'];?></span>
                             </label>
                         </td>
 
-                        <td class="task__date"><?=$val['task_date_done']; ?></td>
-                        <td class="task__file"></td>
-                        <td class="task__controls"></td>
+                        <td class="task__date"><?=$val['date_exp']; ?></td>
+                        <td class="task__controls">
+
+                            <?php if( $val['task_url'] == true ): ?>
+
+                            <a class="download-link" href="#">Home.psd</a> 
+
+                            <?php endif; ?>
+
+                        </td>
+                        
                     </tr>
 
-                    <?php elseif( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>
+                    <?php elseif( $val['status'] == true && $show_complete_tasks == 1 ): ?>
 
-					<tr class="tasks__item task <?php if( $val['task_status'] == true ): ?>task--completed<?php endif; ?> <?php if( $hours_until_end <= 24 && is_int($dt_end) ) :?>task--important<?php endif; ?>" >
+					<tr class="tasks__item task <?php if( $val['status'] == true ): ?>task--completed<?php endif; ?> <?php if( $hours_until_end <= 24 && is_int($dt_end) ) :?>task--important<?php endif; ?>" >
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['task_status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
-                                <span class="checkbox__text"><?=$val['task_name'];?></span>
+                                <input class="checkbox__input visually-hidden <?php if($show_complete_tasks !== 1): ?>task__checkbox<?php endif; ?>" type="checkbox" <?php if($show_complete_tasks !== 1): ?>value="1"<?php endif; ?> <?php if( $val['status'] == true && $show_complete_tasks == 1 ): ?>checked<?php endif; ?>>
+                                <span class="checkbox__text"><?=$val['name'];?></span>
                             </label>
                         </td>
 
-                        <td class="task__date"><?=$val['task_date_done'];?></td>
-                        <td class="task__file"></td>
-                        <td class="task__controls"></td>
+                        <td class="task__date"><?=$val['date_exp'];?></td>
+                        <td class="task__controls">
+
+                        <?php if( $val['task_url'] == true ): ?>
+
+                            <a class="download-link" href="#">Home.psd</a> 
+
+                        <?php endif; ?>
+
+                        </td>
+                        
                     </tr>
 
                    	<?php else: ?>
